@@ -129,4 +129,7 @@ class WaveRNNDataset(Dataset):
         if loc_x<0 or loc_y<0:
             return 0
         return 1
+    
+    def cal_rotation(loc_x, loc_y, coef):
+        return (loc_x-0)/(loc_y+90) * coef**2
 
