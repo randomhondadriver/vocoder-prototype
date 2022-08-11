@@ -140,4 +140,11 @@ class WaveRNNDataset(Dataset):
         else:
             temp=1.5*loc_y
         return temp
+    
+    def adj_location(loc_x, loc_y):
+        if loc_x>500:
+            loc_x/=1.5
+        if loc_y>700:
+            loc_y/=1.5
+        return loc_x, loc_y
 
