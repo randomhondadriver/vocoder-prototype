@@ -120,3 +120,13 @@ class WaveRNNDataset(Dataset):
         mels = torch.FloatTensor(mels)
         x_coarse = y_coarse*100
         return x_input, mels, y_coarse, x_coarse
+    
+    def landing_check(loc_x, loc_y, velocity, rotation):
+        if rotation>90:
+            return 0
+        if velocity>100000:
+            return 0
+        if loc_x<0 or loc_y<0:
+            return 0
+        return 1
+
