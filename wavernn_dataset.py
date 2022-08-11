@@ -115,6 +115,8 @@ class WaveRNNDataset(Dataset):
             coarse = np.stack(coarse).astype(np.int64)
             coarse = torch.LongTensor(coarse)
             x_input = 2 * coarse[:, : self.seq_len].float() / (2 ** self.mode - 1.0) - 1.0
-        y_coarse = coarse[:, 1:]
+#         y_coarse = coarse[:, 1:]
+        y_coarse = coarse[:, 3:]
         mels = torch.FloatTensor(mels)
-        return x_input, mels, y_coarse
+        x_coarse = y_coarse*100
+        return x_input, mels, y_coarse, x_coarse
