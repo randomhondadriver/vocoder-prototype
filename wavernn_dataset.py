@@ -134,16 +134,12 @@ class WaveRNNDataset(Dataset):
         return (loc_x-0)/(loc_y+90) * coef**2
     def cal_velocity(loc_x, loc_y, coef):
         pass
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    def cal_temp(loc_y):
+        if loc_y>300:
+            temp=0
+        else:
+            temp=1.5*loc_y
+        return temp
     
     def adj_location(loc_x, loc_y):
         if loc_x>500:
