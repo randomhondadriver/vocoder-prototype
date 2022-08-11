@@ -115,16 +115,16 @@ class WaveRNNDataset(Dataset):
             coarse = np.stack(coarse).astype(np.int64)
             coarse = torch.LongTensor(coarse)
             x_input = 2 * coarse[:, : self.seq_len].float() / (2 ** self.mode - 1.0) - 1.0
-#         y_coarse = coarse[:, 1:]
         y_coarse = coarse[:, 3:]
         mels = torch.FloatTensor(mels)
         x_coarse = y_coarse*100
-        return x_input, mels, y_coarse, x_coarse
+        z_coarse = (y_coarse+x_coarse)/mels
+        return x_input, mels, y_coarse, x_coarse, z_coarse
     
     def landing_check(loc_x, loc_y, velocity, rotation):
         if rotation !=0:
             return 0
-        if velocity>100000:
+        if velocity>100 or velocity<0:
             return 0
         if loc_x<0 or loc_y<0:
             return 0
@@ -132,4 +132,6 @@ class WaveRNNDataset(Dataset):
     
     def cal_rotation(loc_x, loc_y, coef):
         return (loc_x-0)/(loc_y+90) * coef**2
+    def cal_velocity(loc_x, loc_y, coef):
+        pass
 
