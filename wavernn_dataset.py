@@ -122,7 +122,7 @@ class WaveRNNDataset(Dataset):
         return x_input, mels, y_coarse, x_coarse
     
     def landing_check(loc_x, loc_y, velocity, rotation):
-        if rotation>90:
+        if rotation !=0:
             return 0
         if velocity>100000:
             return 0
